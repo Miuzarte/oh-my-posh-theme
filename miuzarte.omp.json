@@ -1,0 +1,222 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "newline": true,
+      "alignment": "left",
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "os",
+          "background": "p:winBlue",
+          "foreground": "p:winWhite",
+          "template": "{{if .WSL}} WSL at {{end}} {{.Icon}} ",
+          "style": "diamond",
+          "leading_diamond": "╭─"
+        },
+        {
+          "type": "path",
+          "background": "p:winWhite",
+          "foreground": "p:winGray",
+          "template": " {{.Path}} ",
+          "properties": {
+            "folder_separator_icon": "/",
+            "style": "full"
+          },
+          "style": "powerline",
+          "powerline_symbol": ""
+        },
+        {
+          "type": "git",
+          "background": "p:gitOrange",
+          "foreground": "p:winWhite",
+          "background_templates": [
+            "{{if or (.Working.Changed) (.Staging.Changed)}}#a97400{{end}}",
+            "{{if and (gt .Ahead 0) (gt .Behind 0)}}#54433a{{end}}",
+            "{{if gt .Ahead 0}}#744d89{{end}}",
+            "{{if gt .Behind 0}}#744d89{{end}}"
+          ],
+          "template": " {{.UpstreamIcon}} {{.HEAD}}{{if .BranchStatus}} {{.BranchStatus}}{{end}}{{if .Working.Changed}}   {{.Working.String}}{{end}}{{if .Staging.Changed}}   {{.Staging.String}}{{end}}{{if gt .StashCount 0}}   {{.StashCount}}{{end}} ",
+          "properties": {
+            "source": "cli",
+            "branch_max_length": 16,
+            "fetch_upstream_icon": true,
+            "fetch_stash_count": true,
+            "fetch_status": true,
+            "branch_icon": " ",
+            "branch_identical_icon": "",
+            "branch_gone_icon": ""
+          },
+          "style": "diamond",
+          "leading_diamond": " ",
+          "trailing_diamond": ""
+        },
+        {
+          "type": "project",
+          "background": "#ffeb3b",
+          "foreground": "#193549",
+          "template": " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }} {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} ",
+          "style": "diamond",
+          "leading_diamond": " ",
+          "trailing_diamond": ""
+        }
+      ]
+    },
+    {
+      "alignment": "right",
+      "type": "prompt",
+      "overflow": "hide",
+      "segments": [
+        {
+          "type": "go",
+          "background": "p:winWhite",
+          "foreground": "p:goBlue",
+          "template": " {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}}",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "python",
+          "background": "p:pythonBlue",
+          "foreground": "p:pythonYellow",
+          "template": " {{if .Error}}{{.Error}}{{else}}{{if .Venv}}{{.Venv}} {{end}}{{.Full}}{{end}}",
+          "properties": {
+            "display_mode": "context"
+          },
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "java",
+          "background": "p:javaBlue",
+          "foreground": "p:winWhite",
+          "template": " {{ .Full }}",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "lua",
+          "background": "p:luaBlue",
+          "foreground": "p:winWhite",
+          "template": " 5.4.2",
+          "properties": {
+            "fetch_version": false
+          },
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "node",
+          "background": "p:nodeBlack",
+          "foreground": "p:nodeGreen",
+          "template": " {{if .PackageManagerIcon}}{{.PackageManagerIcon}} {{end}}{{.Full}}",
+          "properties": {
+            "fetch_package_manager": true,
+            "npm_icon": "<#cc3a3a></>",
+            "yarn_icon": "<#348cba></>"
+          },
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "php",
+          "background": "p:phpBlack",
+          "foreground": "p:phpBlue",
+          "template": " {{ .Full }}",
+          "style": "diamond",
+          "leading_diamond": "",
+          "trailing_diamond": " "
+        },
+        {
+          "type": "status",
+          "background": "p:winBlue",
+          "foreground": "p:winWhite",
+          "template": " <f>{{.String}}</f> ",
+          "properties": {
+            "always_enabled": false
+          },
+          "style": "accordion",
+          "invert_powerline": true,
+          "powerline_symbol": ""
+        },
+        {
+          "type": "executiontime",
+          "background": "p:winWhite",
+          "foreground": "p:winGray",
+          "template": "  {{.FormattedMs}} ",
+          "properties": {
+            "style": "austin",
+            "always_enabled": false
+          },
+          "style": "accordion",
+          "invert_powerline": true,
+          "powerline_symbol": ""
+        },
+        {
+          "type": "time",
+          "background": "p:winBlue",
+          "foreground": "p:winWhite",
+          "template": "  {{.CurrentDate | date .Format}} ",
+          "properties": {
+            "time_format": "15:04:05"
+          },
+          "style": "diamond",
+          "invert_powerline": true,
+          "trailing_diamond": ""
+        }
+      ]
+    },
+    {
+      "newline": true,
+      "alignment": "left",
+      "type": "prompt",
+      "segments": [
+        {
+          "type": "text",
+          "foreground": "p:winBlue",
+          "style": "plain",
+          "template": "╰─ {{if .Root}}#{{else}}${{end}} "
+        }
+      ]
+    },
+    {
+      "alignment": "right",
+      "type": "rprompt",
+      "segments": [
+        {
+          "type": "session",
+          "foreground": "accent",
+          "style": "plain",
+          "template": "{{.UserName}}@{{.HostName}}"
+        }
+      ]
+    }
+  ],
+  "secondary_prompt": {
+    "foreground": "p:winBlue",
+    "template": "    | "
+  },
+  "accent_color": "#ffffff",
+  "palette": {
+    "winBlue": "#0078d4",
+    "winWhite": "#ededed",
+    "winGray": "#3f3f3f",
+    "gitOrange": "#f34f29",
+    "goBlue": "#00add8",
+    "pythonYellow": "#ffde57",
+    "pythonBlue": "#4584b6",
+    "javaOrange": "#FFA518",
+    "javaBlue": "#5382A1",
+    "luaBlue": "#00007f",
+    "nodeGreen": "#339933",
+    "nodeBlack": "#333333",
+    "phpBlue": "#777BB3",
+    "phpBlack": "#000000"
+  },
+  "version": 2
+}
