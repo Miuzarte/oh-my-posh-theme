@@ -2,7 +2,7 @@
 
 Just my command line theme
 
-![image](https://github.com/user-attachments/assets/7cc76cf1-ef03-4e09-86de-b9972c7c5f16)
+![WindowsTerminal_ZcaRWx3BDS](https://github.com/user-attachments/assets/af9c149f-7918-40e5-8f65-0865a54b9f9c)
 
 ## Features
 

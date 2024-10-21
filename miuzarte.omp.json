@@ -136,7 +136,7 @@
           "type": "status",
           "background": "p:winBlue",
           "foreground": "p:winWhite",
-          "template": " <f>{{.String}}</f> ",
+          "template": " 󰈆 <f>{{.String}}</f> ",
           "properties": {
             "always_enabled": false
           },
