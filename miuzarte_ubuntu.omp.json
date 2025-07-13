@@ -239,7 +239,7 @@
           "properties": {
             "cache_duration": "none"
           },
-          "template": "{{.UserName}}@{{.HostName}}",
+          "template": "{{.UserName}}@{{.HostName}}{{if .WSL}} in WSL{{end}}",
           "foreground": "accent",
           "type": "session",
           "style": "plain"

@@ -31,7 +31,7 @@
             "cache_duration": "none"
           },
           "leading_diamond": "\u256d\u2500\ue0b2",
-          "template": "{{if .WSL}} WSL at {{end}} {{.Icon}} ",
+          "template": " {{.Icon}} ",
           "foreground": "p:winWhite",
           "background": "p:winBlue",
           "type": "os",
