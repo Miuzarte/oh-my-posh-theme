@@ -1,0 +1,287 @@
+.diamond_defaults: &diamond_defaults
+  style: diamond
+  leading_diamond: "" # "\ue0b6"
+  trailing_diamond: " " # "\ue0b4"
+  foreground: p:winWhite
+
+# yaml-language-server: $schema=https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+version: 4
+
+blocks:
+  - type: prompt
+    alignment: left
+    newline: true
+    leading_diamond: "" # "\ue0b2"
+    trailing_diamond: "" # "\ue0b0"
+    segments:
+      - type: os
+        style: diamond
+        foreground: p:winWhite
+        background: p:winBlue
+        template: " {{.Icon}} "
+      - type: path
+        style: powerline
+        foreground: p:winGray
+        background: p:winWhite
+        powerline_symbol: ""
+        template: " {{.Path}} "
+        options:
+          style: full
+
+      - type: git
+        style: diamond
+        foreground: p:winWhite
+        background: p:gitOrange
+        leading_diamond: " "
+        trailing_diamond: ""
+        template: " {{.UpstreamIcon}} {{.HEAD}}{{if .BranchStatus}} {{.BranchStatus}}{{end}}{{if .Working.Changed}}   {{.Working.String}}{{end}}{{if and (.Working.Changed) (.Staging.Changed)}} |{{end}}{{if .Staging.Changed}}   {{.Staging.String}}{{end}}{{if gt .StashCount 0}}   {{.StashCount}}{{end}} "
+      # template: " {{.UpstreamIcon}} {{.HEAD}}{{if .BranchStatus}} {{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{  .Working.String}}{{end}}{{if and (.Working.Changed) (.Staging.Changed)}} |{{end}}{{if .Staging.Changed}}  {{  .Staging.String}}{{end}}{{if gt .StashCount 0}}  {{  .StashCount}}{{end}} "
+      # template: "                   {{.HEAD}}{{if .BranchStatus}} {{.BranchStatus}}{{end}}{{if .Working.Changed}}  {{  .Working.String}}{{end}}{{if and (.Staging.Changed) (.Working.Changed)}} |{{end}}{{if .Staging.Changed}}  {{  .Staging.String}}{{end}} "
+        background_templates:
+          - "{{if or (.Working.Changed) (.Staging.Changed)}}#A97400{{end}}"
+          - "{{if and (gt .Ahead 0) (gt .Behind 0)}}#54433A{{end}}"
+          - "{{if gt .Ahead 0}}#744D89{{end}}"
+          - "{{if gt .Behind 0}}#744D89{{end}}"
+        options:
+          fetch_status: true
+          fetch_push_status: true
+          fetch_upstream_icon: true
+          fetch_bare_info: true
+          fetch_user: true
+          disable_with_jj: false
+          native_fallback: false
+          mapped_branches:
+            feat/*: "🚀 "
+            bug/*: "🐛 "
+
+      - type: project
+        style: diamond
+        foreground: "#193549"
+        background: "#FFEB3B"
+        leading_diamond: " "
+        trailing_diamond: ""
+        template: " {{ if .Error }}{{ .Error }}{{ else }}{{ if .Version }}\uf487 {{.Version}}{{ end }} {{ if .Name }}{{ .Name }}{{ end }}{{ end }} "
+
+  - type: prompt
+    alignment: right
+    overflow: hide
+    segments:
+      - type: go
+        <<: *diamond_defaults
+        background: p:goGopherBlue
+        #  \ue626
+        #  \ue627
+        template: "{{if not .Full}} {{end}} {{if .Error}}{{.Error}}{{else}}{{.Full}}{{end}}"
+      - type: kotlin
+        <<: *diamond_defaults
+        background: p:kotlinPurple
+        #  \ue634
+        #  \ue81b
+        # 󱈙 \udb84\ude19
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: java
+        <<: *diamond_defaults
+        background: p:javaBlue
+        #  \ue256
+        #  \ue66d
+        #  \ue738
+        #  \uedaf
+        # 󰬷 \udb82\udf37
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: dart
+        <<: *diamond_defaults
+        background: p:dartBahamaBlue
+        #  \ue64c
+        #  \ue798
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: zig
+        <<: *diamond_defaults
+        background: p:zigYellow
+        #  \ue6a9
+        #  \ue8ef
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: rust
+        <<: *diamond_defaults
+        background: p:rustOrange
+        #  \ue68b
+        #  \ue7a8
+        # 󱘗 \udb85\ude17
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: python
+        <<: *diamond_defaults
+        foreground: p:pythonKournikova
+        background: p:pythonPhiladelphia
+        #  \ue235
+        #  \ue606
+        #  \ue73c
+        #  \ued1b
+        # 󰌠 \udb80\udf20
+        template: " {{if .Error}}{{.Error}}{{else}}{{if .Venv}}{{.Venv}} {{end}}{{.Full}}{{end}}"
+      - type: node
+        <<: *diamond_defaults
+        foreground: p:nodeBrightCobaltGreen
+        background: p:nodePearlBlack
+        #  \ue718
+        #  \ue719
+        #  \ue844
+        #  \ue845
+        #  \ued0d
+        #  \ued44
+        # 󰎙 \udb80\udf99
+        template: "{{if not .Full}} {{end}} {{if .PackageManagerIcon}}{{.PackageManagerIcon}} {{end}}{{.Full}}"
+        options:
+          fetch_package_manager: true
+      - type: lua
+        <<: *diamond_defaults
+        background: p:luaBlue
+        #  \ue620
+        #  \ue826
+        # 󰢱 \udb82\udcb1
+        template: "{{if not .Full}} {{end}} {{ .Full }}"
+      - type: php
+        <<: *diamond_defaults
+        background: p:phpAda
+        #  \ue73d
+        #  \ued6d
+        #  \ue608
+        # 󰌟 \udb80\udf1f
+        template: " {{ .Full }}"
+
+      - type: status
+        style: accordion
+        foreground: p:winWhite
+        background: p:winBlue
+        # 右对齐的 powerline 组, 都要 invert
+        invert_powerline: true
+        powerline_symbol: ""
+        # 󰈆 \udb80\ude06
+        template: " 󰈆 {{.String}} "
+      - type: executiontime
+        style: accordion
+        foreground: p:winGray
+        background: p:winWhite
+        invert_powerline: true
+        powerline_symbol: ""
+        #  \ueba2
+        template: "  {{.FormattedMs}} "
+        options:
+          threshold: 10
+      - type: time
+        style: diamond
+        foreground: p:winWhite
+        background: p:winBlue
+        invert_powerline: true
+        trailing_diamond: ""
+        #  \uf017
+        #  \uf073
+        #  \uf43a
+        #  \ue641
+        # 󰥔 \udb82\udd54
+        template: " {{.CurrentDate | date .Format}} "
+        options:
+          time_format: "15:04:05 1/2"
+
+  - type: prompt
+    alignment: left
+    newline: true
+    segments:
+      - type: text
+        style: plain
+        foreground: p:winBlue
+        template: "{{if .Root}}#{{else}}${{end}} "
+
+  - type: rprompt
+    alignment: right
+    filler: ""
+    segments:
+      - type: session
+        style: plain
+        foreground: accent
+        template: "{{if .SSHSession}} {{end}}{{.UserName}}@{{.HostName}}{{if .WSL}} in WSL{{end}}"
+
+secondary_prompt:
+  template: "| "
+  foreground: p:winBlue
+
+accent_color: "#FFFFFF"
+
+palette:
+  winBlue: "#0078D4"
+  winGray: "#3F3F3F"
+  winWhite: "#EDEDED"
+
+  gitOrange: "#F34F29"
+
+  # https://go.dev/assets/go-brand-book-v1.9.5.pdf
+  goGopherBlue: "#00ADD8"
+
+  # https://brandpalettes.com/kotlin-colors/
+  kotlinRose: "#E24462"
+  kotlinPurple: "#B125EA"
+  kotlinPurpleBlue: "#7F52FF"
+  kotlinBlack: "#000000"
+
+  # https://www.brandcolorcode.com/java
+  javaBlue: "#007396"
+  javaOrange: "#ED8B00"
+
+  # https://brandfetch.com/dartlang.org
+  dartBahamaBlue: "#01579B"
+  dartSeagull: "#6DB7EB"
+  dartMirage: "#1C2834"
+
+  # https://github.com/ziglang/logo
+  zigYellow: "#F7A41D"
+  zigBlack: "#121212"
+
+  # https://rustfoundation.org/brand-guide/
+  rustDarkBlue: "#1E2650"
+  rustOrange: "#D34516"
+  rustBlue: "#28607F"
+  rustSilver: "#67737A"
+  rustGreen: "#61784D"
+
+  # https://www.schemecolor.com/python-logo-colors.php
+  pythonNatureBlue: "#4B8BBE"
+  pythonPhiladelphia: "#306998"
+  pythonKournikova: "#FFE873"
+  pythonBrightSun: "#FFD43B"
+  pythonStormDust: "#646464"
+
+  # https://www.schemecolor.com/node-js-logo.php
+  nodePearlBlack: "#303030"
+  nodeMustardGreen: "#68A063"
+  nodeBrightCobaltGreen: "#3C873A"
+
+  # https://www.lua.org/images/luaa.gif
+  luaBlue: "#00007F"
+
+  # https://www.schemecolor.com/php.php
+  phpAda: "#474A8A"
+  phpAlayna: "#787CB5"
+  phpEchoBlue: "#B0B3D6"
+
+  # === unused ===
+
+  # https://flutter.dev/brand
+  flutterNavy: "#042B59"
+  flutterBlue: "#0553B1"
+  flutterSky: "#027DFD"
+
+  # https://www.schemecolor.com/javascript-logo-colors.php
+  jsCorn: "#F0DB4F"
+  jsBlackWool: "#323330"
+
+  # https://www.schemecolor.com/npm-logo-colors.php
+  npmMediumCarmine: "#CC3534"
+  npmFullWhite: "#FFFFFF"
+
+  # https://www.schemecolor.com/vue-js-logo-colors.php
+  vueColdSteel: "#34495E"
+  vueMint: "#41B883"
+
+  # https://www.schemecolor.com/jsdelivr-logo-colors.php
+  # https://www.schemecolor.com/phpmyadmin-logo-colors.php
+  # https://www.schemecolor.com/r-programming-language-logo-colors.php
+  # https://www.schemecolor.com/ruby-logo-colors.php
+  # https://www.schemecolor.com/sublime-text-logo-colors.php
