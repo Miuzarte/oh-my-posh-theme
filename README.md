@@ -2,7 +2,7 @@
 
 Just my command line theme
 
-![WindowsTerminal_ZcaRWx3BDS](https://github.com/user-attachments/assets/af9c149f-7918-40e5-8f65-0865a54b9f9c)
+![WindowsTerminal_260704](https://github.com/user-attachments/assets/d2687d68-36d2-482b-ad4a-df35af4993f5)
 
 ## Features
 
@@ -17,8 +17,12 @@ Just my command line theme
 ### Languages
 
 - Go
-- Python
+- Kotlin
 - Java
-- Lua
+- Dart
+- Zig
+- Rust
+- Python
 - Node
+- Lua
 - PHP
