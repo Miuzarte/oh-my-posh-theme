@@ -196,7 +196,7 @@ blocks:
       - type: session
         style: plain
         foreground: accent
-        template: "{{if .SSHSession}} {{end}}{{.UserName}}@{{.HostName}}{{if .WSL}} in WSL{{end}}"
+        template: "{{if .SSHSession}} {{end}}{{.UserName}}@{{.HostName}}{{if .WSL}}/WSL{{end}}"
 
 secondary_prompt:
   template: "| "
